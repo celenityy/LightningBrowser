@@ -37,7 +37,7 @@ public class BrowserActivity extends BoundActivity {
     private boolean isEphemeral;
     private boolean isTab;
     private boolean isTopBarHidden;
-    private final String DEFAULT_URL = "https://www.google.com/";
+    private final String DEFAULT_URL = "https://duckduckgo.com/";
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

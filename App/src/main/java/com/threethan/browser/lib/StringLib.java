@@ -5,14 +5,14 @@ public class StringLib {
         if (url.startsWith("about:")) return true;
         return (!(!url.contains("://") || !url.contains(".")));
     }
-    public static final String GOOGLE_SEARCH_PRE = "https://www.google.com/search?q=";
-    public static String googleSearchForUrl(String string) {
-        return GOOGLE_SEARCH_PRE+string;
+    public static final String DDG_SEARCH_PRE = "https://duckduckgo.com/search?q=";
+    public static String ddgSearchForUrl(String string) {
+        return DDG_SEARCH_PRE+string;
     }
     public static String toValidUrl(String url) {
         if (StringLib.isValidUrl(url)) return url;
         else if (StringLib.isValidUrl("https://" + url)) return "https://" + url;
-        else return StringLib.googleSearchForUrl(url);
+        else return StringLib.ddgSearchForUrl(url);
     }
     public static class ParititionedUrl {
         public final String prefix;
