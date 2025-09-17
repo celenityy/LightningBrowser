@@ -2,7 +2,6 @@ package com.threethan.browser.browser.GeckoView.Delegate;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -121,9 +120,6 @@ public class ExtensionPromptDelegate implements WebExtensionController.PromptDel
                 .then(value -> {
                     assert value != null;
                     Log.v("WEBEXTLIST", value.toString());
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        value.removeIf(webExtension -> webExtension.id.equals("fixes@internal.ext"));
-                    }
                     adapter.addAll(value);
 
                     dialog.show();

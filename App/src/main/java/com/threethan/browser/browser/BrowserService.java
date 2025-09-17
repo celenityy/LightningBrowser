@@ -80,8 +80,6 @@ public class BrowserService extends Service {
         return sRuntime;
     }
 
-    private static final String EXTENSION_LOCATION = "resource://android/assets/internalwebext/";
-    private static final String EXTENSION_ID = "fixes@internal.ext";
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -135,13 +133,7 @@ public class BrowserService extends Service {
                 .extensionsWebAPIEnabled(true)
                 .aboutConfigEnabled(true);
         BrowserService.sRuntime = GeckoRuntime.create(this, set.build());
-        // Custom Fixes
-        sRuntime.getWebExtensionController()
-                .ensureBuiltIn(EXTENSION_LOCATION, EXTENSION_ID)
-                .accept(
-                        extension -> Log.i("MessageDelegate", "Extension installed: " + extension),
-                        e -> Log.e("MessageDelegate", "Error registering WebExtension", e)
-                );
+        sRuntime.getWebExtensionController();
         // Install Prompts
         sRuntime.getWebExtensionController().setPromptDelegate(extensionPromptDelegate);
     }
