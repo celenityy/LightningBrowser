@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     defaultConfig {
         compileSdk 36
-        minSdkVersion 24
+        minSdkVersion 26
         versionCode 1210
         versionName "1.2.1"
 
