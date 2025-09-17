@@ -28,13 +28,11 @@ public class ExtensionPromptDelegate implements WebExtensionController.PromptDel
     final static String EXTENSIONS_URL = "https://addons.mozilla.org/firefox/extensions/";
     /** @noinspection deprecation*/
     @Nullable
-    @Override
     public GeckoResult<AllowOrDeny> onInstallPrompt(@NonNull WebExtension extension) {
         return GeckoResult.fromValue(AllowOrDeny.ALLOW);
     }
 
     @Nullable
-    @Override
     public GeckoResult<AllowOrDeny> onInstallPrompt(@NonNull WebExtension extension, @NonNull String[] permissions, @NonNull String[] origins) {
         return GeckoResult.fromValue(AllowOrDeny.ALLOW);
     }

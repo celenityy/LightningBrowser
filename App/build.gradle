@@ -28,7 +28,7 @@ android {
 }
 ext {
     // https://maven.mozilla.org/?prefix=maven2/org/mozilla/geckoview/
-    geckoviewVersion = "129.0.20240819150008" // Newer versions have issues :(
+    geckoviewVersion = "143.0.20250908174027"
 }
 dependencies {
 
