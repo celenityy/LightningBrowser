@@ -16,3 +16,9 @@
 #   public *;
 #}
 -keep class androidx.lifecycle.** { *; }
+
+-dontwarn java.beans.BeanInfo
+-dontwarn java.beans.FeatureDescriptor
+-dontwarn java.beans.IntrospectionException
+-dontwarn java.beans.Introspector
+-dontwarn java.beans.PropertyDescriptor
