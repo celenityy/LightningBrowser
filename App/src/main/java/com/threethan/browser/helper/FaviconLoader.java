@@ -20,7 +20,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public abstract class FaviconLoader {
-    private static final String ICON_URL = "https://www.google.com/s2/favicons?domain=%s&sz=128";
+    private static final String ICON_URL = "https://icons.duckduckgo.com/ip3/%s.ico";
     protected static final Map<String, Drawable> iconByBaseUrl = new ConcurrentHashMap<>();
     private static final ConcurrentHashMap<String, Object> locks = new ConcurrentHashMap<>();
     public static void loadFavicon(final Activity activity, String url, final IconCallback callback) {
