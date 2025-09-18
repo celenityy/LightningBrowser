@@ -26,26 +26,37 @@ import org.mozilla.geckoview.WebExtensionController;
 public class ExtensionPromptDelegate implements WebExtensionController.PromptDelegate {
     final static String EXTENSIONS_URL = "https://addons.mozilla.org/firefox/extensions/";
     /** @noinspection deprecation*/
+    
     @Nullable
-    public GeckoResult<AllowOrDeny> onInstallPrompt(@NonNull WebExtension extension) {
-        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
-    }
-
-    @Nullable
-    public GeckoResult<AllowOrDeny> onInstallPrompt(@NonNull WebExtension extension, @NonNull String[] permissions, @NonNull String[] origins) {
-        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+    @Override
+    public GeckoResult<WebExtension.PermissionPromptResponse> onInstallPromptRequest(
+        @NonNull WebExtension extension,
+        @NonNull String[] permissions,
+        @NonNull String[] origins,
+        @NonNull final String[] dataCollectionPermissions) {
+    return GeckoResult.fromValue(
+        new org.mozilla.geckoview.WebExtension.PermissionPromptResponse(
+            true, // isPermissionsGranted
+            true, // isPrivateModeGranted
+            false // Data collection (isTechnicalAndInteractionDataGranted)
+            ));
     }
 
     @Nullable
     @Override
-    public GeckoResult<AllowOrDeny> onOptionalPrompt(@NonNull WebExtension extension, @NonNull String[] permissions, @NonNull String[] origins) {
-        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+    public GeckoResult<AllowOrDeny> onOptionalPrompt(
+        final @NonNull WebExtension extension, final String[] permissions, final String[] origins) {
+        return GeckoResult.allow();
     }
 
     @Nullable
     @Override
-    public GeckoResult<AllowOrDeny> onUpdatePrompt(@NonNull WebExtension currentlyInstalled, @NonNull WebExtension updatedExtension, @NonNull String[] newPermissions, @NonNull String[] newOrigins) {
-        return GeckoResult.fromValue(AllowOrDeny.ALLOW);
+    public GeckoResult<AllowOrDeny> onUpdatePrompt(
+        @NonNull WebExtension currentlyInstalled,
+        @NonNull WebExtension updatedExtension,
+        @NonNull String[] newPermissions,
+        @NonNull String[] newOrigins) {
+        return GeckoResult.allow();
     }
 
     public void showList() {
@@ -83,21 +94,21 @@ public class ExtensionPromptDelegate implements WebExtensionController.PromptDel
                                         parent,
                                         false);
                     }
-                    final WebExtensionController extentionController = BrowserService.sRuntime.getWebExtensionController();
+                    final WebExtensionController extensionController = BrowserService.sRuntime.getWebExtensionController();
                     View finalView = view;
 
                     final boolean[] enabled = {item.metaData.disabledFlags == 0};
                     view.setOnClickListener(v -> {
                         if (enabled[0])
-                            extentionController.disable(item, WebExtensionController.EnableSource.USER);
+                            extensionController.disable(item, WebExtensionController.EnableSource.USER);
                         else
-                            extentionController.enable(item, WebExtensionController.EnableSource.USER);
+                            extensionController.enable(item, WebExtensionController.EnableSource.USER);
                         enabled[0] = !enabled[0];
                         finalView.setAlpha(enabled[0] ? 1f : 0.5f);
                     });
 
                     view.findViewById(R.id.uninstall).setOnClickListener(v -> {
-                        extentionController.uninstall(item);
+                        extensionController.uninstall(item);
                         finalView.setVisibility(View.GONE);
                         dialog.dismiss();
                         showList();
